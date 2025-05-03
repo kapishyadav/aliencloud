@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AlienCloudApplication",
+            "request": "launch",
+            "mainClass": "com.example.AlienCloudApplication"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AlienCloudApplication<aliencloud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.AlienCloudApplication",
+            "projectName": "aliencloud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
