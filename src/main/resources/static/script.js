@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const contactForm = document.getElementById('contact-form');
     if (loginForm) {
       loginForm.addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent default form submission
 
           const username = document.getElementById("username").value;
           const password = document.getElementById("password").value;

@@ -1,3 +1,6 @@
 com/example/controller/AuthenticationController.class
 com/example/AlienCloudApplication.class
-com/example/service/UserService.class
+com/example/model/MyAppUserRepository.class
+com/example/model/MyAppUserService.class
+com/example/security/SecurityConfig.class
+com/example/model/MyAppUser.class
