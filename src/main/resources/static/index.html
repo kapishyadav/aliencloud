@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alien Cloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .glow-text {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px #7f00ff, 0 0 30px #e100ff;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-purple-800 via-indigo-900 to-black text-white min-h-screen flex flex-col">
+
+  <!-- Top Center Header -->
+  <header class="w-full text-center mt-8">
+    <h1 class="text-5xl font-extrabold glow-text">Alien Cloud</h1>
+  </header>
+
+  <!-- Centered Main Button -->
+  <main class="flex-grow flex items-center justify-center">
+    <a href="/login.html">
+      <button class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white text-xl px-8 py-4 rounded-full shadow-lg transition-transform transform hover:scale-110 float">
+        Enter the Portal
+      </button>
+    </a>
+  </main>
+
+</body>
+</html> 

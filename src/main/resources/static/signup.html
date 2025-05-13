@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - AlienCloud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 1.5s ease-in-out; }
+
+        @keyframes loadingAnimation {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loading-bar {
+            animation: loadingAnimation 3s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-600 h-screen flex items-center justify-center">
+
+    <div class="bg-white bg-opacity-30 p-8 rounded-lg shadow-lg w-96 space-y-6 fade-in">
+        <h1 class="text-4xl font-extrabold text-center text-gray-800">AlienCloud</h1>
+        <p class="text-center text-white font-semibold">Create your account to get started.</p>
+
+        <form id="signupForm" class="space-y-4">
+            <h2 class="text-2xl font-bold text-white text-center">Sign Up</h2>
+            
+            <div>
+                <label for="username" class="block text-sm font-semibold text-white">Username</label>
+                <input type="text" id="username" name="username" class="w-full mt-2 p-3 border-2 border-gray-300 rounded-md" required>
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-semibold text-white">Email</label>
+                <input type="email" id="email" name="email" class="w-full mt-2 p-3 border-2 border-gray-300 rounded-md" required>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-semibold text-white">Password</label>
+                <input type="password" id="password" name="password" class="w-full mt-2 p-3 border-2 border-gray-300 rounded-md" required>
+            </div>
+
+            <div>
+                <label for="passwordcon" class="block text-sm font-semibold text-white">Confirm Password</label>
+                <input type="password" id="passwordcon" name="passwordcon" class="w-full mt-2 p-3 border-2 border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" id="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-md hover:scale-105 transform transition-all duration-200">Sign Up</button>
+            </div>
+            
+            <div class="text-center text-white">
+                <p>Already have an account? <a href="/login.html" class="text-blue-300 hover:text-blue-200">Log In</a></p>
+            </div>
+        </form>
+        
+        <div id="errorMessage" class="text-center text-red-500 hidden">
+            <p>Error creating account. Please try again.</p>
+        </div>
+
+        <div id="successMessage" class="text-center text-green-500 hidden">
+            <p>Account created successfully! Redirecting to login...</p>
+        </div>
+
+        <!-- Loading Animation -->
+        <div id="loadingAnimation" class="w-full mt-4 h-1 bg-gray-300 rounded-full hidden">
+            <div class="loading-bar h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('passwordcon').value;
+            
+            // Show loading animation
+            document.getElementById('loadingAnimation').classList.remove('hidden');
+            document.getElementById('errorMessage').classList.add('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+            
+            if (password !== confirmPassword) {
+                document.getElementById('errorMessage').textContent = "Passwords do not match";
+                document.getElementById('errorMessage').classList.remove('hidden');
+                document.getElementById('loadingAnimation').classList.add('hidden');
+                return;
+            }
+            
+            const data = {
+                username: username.trim(),
+                email: email.trim(),
+                password: password
+            };
+            
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(async response => {
+                const contentType = response.headers.get('content-type');
+                const isJson = contentType && contentType.includes('application/json');
+                const data = isJson ? await response.json() : await response.text();
+
+                if (response.ok) {
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    document.getElementById('errorMessage').classList.add('hidden');
+                    setTimeout(() => {
+                        window.location.href = '/login.html';
+                    }, 2000);
+                } else {
+                    throw new Error(isJson ? JSON.stringify(data) : data);
+                }
+            })
+            .catch(error => {
+                let errorMessage = "Error creating account. ";
+                try {
+                    const parsedError = JSON.parse(error.message);
+                    errorMessage += parsedError.message || error.message;
+                } catch {
+                    errorMessage += error.message;
+                }
+                document.getElementById('errorMessage').textContent = errorMessage;
+                document.getElementById('errorMessage').classList.remove('hidden');
+                document.getElementById('successMessage').classList.add('hidden');
+            })
+            .finally(() => {
+                document.getElementById('loadingAnimation').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

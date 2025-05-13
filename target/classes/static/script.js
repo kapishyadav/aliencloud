@@ -1,4 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const submitButton = document.getElementById("submit-button");
+    submitButton.addEventListener("click", function (event) {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        const email = document.getElementById("email").value;
+        const data = {
+            username: username,
+            password: password,
+            email: email
+        }
+
+        if (password !== confirmPassword) {
+            const jsonData = JSON.stringify(data);
+            fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: jsonData
+            })
+            .then(response =>{
+                //Handle response
+            })
+
+
     const contactForm = document.getElementById('contact-form');
     if (loginForm) {
       loginForm.addEventListener("submit", function (event) {
