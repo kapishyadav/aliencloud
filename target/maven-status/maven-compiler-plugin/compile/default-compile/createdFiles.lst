@@ -1,5 +1,5 @@
-com/example/controller/AuthenticationController.class
 com/example/AlienCloudApplication.class
+com/example/controller/AuthenticationController.class
 com/example/model/MyAppUserRepository.class
 com/example/model/MyAppUserService.class
 com/example/security/SecurityConfig.class
