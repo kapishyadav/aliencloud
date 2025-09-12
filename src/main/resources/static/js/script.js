@@ -119,7 +119,7 @@ async function handleUpload() {
     //     alert("An error occurred during upload.");
     // });
     try {
-        const response = await fetch("http://localhost:8081/upload", {
+        const response = await fetch("/upload", {
             method: "POST",
             body: formData
         });
