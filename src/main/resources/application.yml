@@ -6,9 +6,9 @@ server:
         include-binding-errors: always
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/registration
-        password: Kapish@288
-        username: postgres
+        url: ${DB_URL}
+        password: ${DB_PASSWORD}
+        username: ${DB_USERNAME}
         driver-class-name: org.postgresql.Driver
     jpa:
         hibernate:
