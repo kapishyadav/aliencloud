@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/upload")
 public class UploadController {
-    @PostMapping("path")
+    @PostMapping
     public ResponseEntity<String> handleFileUpload(
             @RequestParam(value = "document", required = false) MultipartFile document,
             @RequestParam(value = "photo", required = false) MultipartFile photo,
