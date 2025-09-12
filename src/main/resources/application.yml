@@ -6,9 +6,9 @@ server:
         include-binding-errors: always
 spring:
     datasource:
-        url: jdbc:postgresql://dpg-d326kvffte5s7386s2k0-a/aliencloud_postgres_render
-        password: YbAS8c0GDCBz4mUnCpuEsVtxthNVEkj3
-        username: aliencloud_postgres_render_user
+        url: ${DB_URL}
+        password: ${DB_PASSWORD}
+        username: ${DB_USERNAME}
         driver-class-name: org.postgresql.Driver
     jpa:
         hibernate:
