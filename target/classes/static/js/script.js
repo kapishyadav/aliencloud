@@ -102,24 +102,9 @@ async function handleUpload() {
     for (const [key, value] of formData.entries()) {
         console.log(`Selected file : 📂 ${key}: ${value.name}`);
     }
-
-    // fetch("/upload", {
-    //     method: "POST",
-    //     body: formData
-    // })
-    // .then(response => {
-    //     if (response.ok) {
-    //         alert("Files uploaded successfully!");
-    //     } else {
-    //         alert("File upload failed");
-    //     }
-    // })
-    // .catch(error => {
-    //     console.error("Upload error:", error);
-    //     alert("An error occurred during upload.");
-    // });
+    
     try {
-        const response = await fetch("http://localhost:8081/upload", {
+        const response = await fetch("/upload", {
             method: "POST",
             body: formData
         });

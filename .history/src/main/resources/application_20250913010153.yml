@@ -1,0 +1,24 @@
+server:
+    address: 0.0.0.0
+    port: 8081
+    error:
+        include-message: always
+        include-binding-errors: always
+spring:
+    datasource:
+        url: ${DB_URL}
+        password: ${DB_PASSWORD}
+        username: ${DB_USERNAME}
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+                show_sql: true
+    servlet:
+        multipart:
+            max-file-size: 10MB  # Sets the maximum size for a single file
+            max-request-size: 10MB # Sets the maximum size for the entire request
