@@ -1,0 +1,10 @@
+com/example/AlienCloudApplication.class
+com/example/config/WebConfig.class
+com/example/controller/AuthenticationController.class
+com/example/security/CustomOAuthUser.class
+com/example/controller/RegistrationController.class
+com/example/model/MyAppUserRepository.class
+com/example/model/MyAppUserService.class
+com/example/security/SecurityConfig.class
+com/example/controller/UploadController.class
+com/example/model/MyAppUser.class

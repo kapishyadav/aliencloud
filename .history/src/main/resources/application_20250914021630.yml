@@ -1,0 +1,45 @@
+server:
+    address: 0.0.0.0
+    port: 8081
+    error:
+        include-message: always
+        include-binding-errors: always
+spring:
+    datasource:
+        url: ${DB_URL}
+        password: ${DB_PASSWORD}
+        username: ${DB_USERNAME}
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+                show_sql: true
+    servlet:
+        multipart:
+            max-file-size: 10MB  # Sets the maximum size for a single file
+            max-request-size: 10MB # Sets the maximum size for the entire request
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: ${GOOGLE_SIGN_IN_CLIENT_ID}
+                        client-secret: ${GOOGLE_SIGN_IN_CLIENT_SECRET}
+                        scope: openid,profile,email
+                    github:
+                        client-id: ${GITHUB_SIGN_IN_CLIENT_ID}
+                        client-secret: ${GITHUB_SIGN_IN_CLIENT_SECRET}
+                        scope: user:email
+                    apple:
+                        client-id: ${APPLE_SIGN_IN_CLIENT_ID}
+                        client-secret: ${APPLE_SIGN_IN_CLIENT_SECRET}
+                        scope: name,email
+                provider:
+                    apple:
+                        authorization-uri: https://appleid.apple.com/auth/authorize
+                        token-uri: https://appleid.apple.com/auth/token
+                        jwk-set-uri: https://appleid.apple.com/auth/keys

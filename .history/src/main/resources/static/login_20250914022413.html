@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AlienCloud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 1.5s ease-in-out; }
+
+        @keyframes loadingAnimation {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loading-bar {
+            animation: loadingAnimation 3s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-600 h-screen flex items-center justify-center">
+
+    <div class="bg-white bg-opacity-30 p-8 rounded-lg shadow-lg w-96 space-y-6 fade-in">
+        <h1 class="text-4xl font-extrabold text-center text-gray-800">AlienCloud</h1>
+        <p class="text-center text-white font-semibold">Please log in to access the upload page.</p>
+
+        <form method="POST" action="/login" class="space-y-4">
+            <h2 class="text-2xl font-bold text-white text-center">Login</h2>
+            
+            <div th:if="${param.error}" class="text-center text-red-500">
+                <p>Invalid username or password.</p>
+            </div>
+            
+            <div>
+                <label for="username" class="block text-sm font-semibold text-white">Username</label>
+                <input type="text" id="username" name="username" class="w-full mt-2 p-3 border-2 border-gray-300 rounded-md" required>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-semibold text-white">Password</label>
+                <input type="password" id="password" name="password" class="w-full mt-2 p-3 border-2 border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-md hover:scale-105 transform transition-all duration-200">Log In</button>
+            </div>
+            <div class="text-center text-white">
+                <p>Don't have an account? <a href="/signup.html" class="text-blue-300 hover:text-blue-200">Register</a></p>
+            </div>
+        </form>
+
+        <!-- 🔥 Social Login Buttons -->
+        <div class="mt-6 space-y-3">
+            <button onclick="window.location.href='/auth/google'" 
+                class="w-full py-3 bg-white text-gray-700 rounded-md shadow hover:scale-105 transform transition-all duration-200">
+                <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" class="inline w-5 h-5 mr-2">
+                Sign in with Google
+            </button>
+            
+            <button onclick="window.location.href='/auth/github'" 
+                class="w-full py-3 bg-gray-800 text-white rounded-md shadow hover:scale-105 transform transition-all duration-200">
+                <img src="https://www.svgrepo.com/show/475654/github-color.svg" alt="GitHub" class="inline w-5 h-5 mr-2">
+                Sign in with GitHub
+            </button>
+        </div>
+
+        <!-- Loading Animation -->
+        <div id="loadingAnimation" class="w-full mt-4 h-1 bg-gray-300 rounded-full hidden">
+            <div class="loading-bar h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
+        </div>
+    </div>
+
+</body>
+</html>
