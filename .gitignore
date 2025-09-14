@@ -1,1 +1,8 @@
 /.idea/
+/.history/
+# Ignore environment variable files
+.env
+*.env
+aliencloud-render.env
+aliencloud-dev.env
+

@@ -5,11 +5,18 @@ server:
         include-message: always
         include-binding-errors: always
 spring:
+    config:
+        import: optional:file:aliencloud-render.env[.properties]
     datasource:
         url: ${DB_URL}
         password: ${DB_PASSWORD}
         username: ${DB_USERNAME}
         driver-class-name: org.postgresql.Driver
+        hikari:
+            maximum-pool-size: 2   # safe for free-tier
+            minimum-idle: 1
+            idle-timeout: 30000
+            max-lifetime: 1800000
     jpa:
         hibernate:
             ddl-auto: update

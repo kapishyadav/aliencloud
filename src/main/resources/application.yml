@@ -5,6 +5,8 @@ server:
         include-message: always
         include-binding-errors: always
 spring:
+    config:
+        import: optional:file:aliencloud-render.env[.properties]
     datasource:
         url: ${DB_URL}
         password: ${DB_PASSWORD}
