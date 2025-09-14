@@ -8,11 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.example.model.MyAppUser;
 import com.example.model.MyAppUserService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,10 +43,12 @@ public class SecurityConfig {
 
 
     @Bean
-    public OAuth2UserService<org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest, OAuth2User> oAuth2UserService() {
+    public OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService() {
     return userRequest -> {
-        OAuth2User oAuth2User = appUserService.loadUser(userRequest);
-        return new CustomOAuthUser(oAuth2User); // wrap here
+        OAuth2User oAuth2User = new DefaultOAuth2UserService().loadUser(userRequest);
+        MyAppUser user = appUserService.loadUserEntity(userRequest, oAuth2User);
+        return new AppUserPrincipal(user, oAuth2User.getAttributes());
+        
     };
 }
 
