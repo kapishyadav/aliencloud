@@ -5,4 +5,5 @@
 *.env
 aliencloud-render.env
 aliencloud-dev.env
-
+# Maven build directory
+/target/

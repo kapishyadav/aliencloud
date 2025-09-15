@@ -1,6 +1,7 @@
+com/example/security/AppUserPrincipal.class
 com/example/AlienCloudApplication.class
 com/example/config/WebConfig.class
-com/example/controller/AuthenticationController.class
+com/example/config/PasswordConfig.class
 com/example/security/CustomOAuthUser.class
 com/example/controller/RegistrationController.class
 com/example/model/MyAppUserRepository.class

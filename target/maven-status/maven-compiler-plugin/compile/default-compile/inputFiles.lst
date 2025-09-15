@@ -8,5 +8,6 @@
 /Users/kapishyadavbanda/Open_Source_Projects/aliencloud/src/main/java/com/example/model/MyAppUserRepository.java
 /Users/kapishyadavbanda/Open_Source_Projects/aliencloud/src/main/java/com/example/model/MyAppUserService.java
 /Users/kapishyadavbanda/Open_Source_Projects/aliencloud/src/main/java/com/example/security/AppUserPrincipal.java
+/Users/kapishyadavbanda/Open_Source_Projects/aliencloud/src/main/java/com/example/security/CustomOAuth2UserService.java
 /Users/kapishyadavbanda/Open_Source_Projects/aliencloud/src/main/java/com/example/security/CustomOAuthUser.java
 /Users/kapishyadavbanda/Open_Source_Projects/aliencloud/src/main/java/com/example/security/SecurityConfig.java
