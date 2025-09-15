@@ -56,8 +56,6 @@ sequenceDiagram
 
 ## 🏗️ Infrastructure Overview
 
-## 🏗️ Infrastructure Overview
-
 ```mermaid
 flowchart TD
     subgraph Cloud[🌐 Render Cloud Hosting]
