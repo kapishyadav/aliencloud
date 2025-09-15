@@ -114,8 +114,10 @@ async function handleUpload() {
         if (response.ok) {
             const text = await response.text();
             console.log("✅ Success:", text);
+            alert("✅ Upload successful: " + text);
         } else {
             console.log("❌ Error:", response.status, response.statusText);
+            alert("❌ Upload failed: " + response.statusText);
         }
     } catch (error) {
         console.error("🚨 Upload failed:", error);

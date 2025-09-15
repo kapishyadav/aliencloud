@@ -50,4 +50,14 @@ logging:
         org.hibernate.SQL: DEBUG
         org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
+sftp:
+    host: 100.98.121.85    # Tailscale IP
+    port: 22
+    username: ${SERVER_USERNAME}   # your Linux username
+    password: ${SERVER_PASSWORD}  # your Linux password
+    remoteDir: /home/alienbamboo/uploads/
+
+storage:
+    base-dir: /home/alienbamboo/uploads
+
                     
