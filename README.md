@@ -59,7 +59,7 @@ sequenceDiagram
 ```mermaid
 flowchart TD
     subgraph Cloud[🌐 Render Cloud Hosting]
-        A[Spring Boot App\n(AlienCloud)]
+        A[Spring Boot App <br/> (AlienCloud)]
     end
 
     subgraph Tailscale[🔒 Tailscale Mesh VPN]
@@ -71,7 +71,7 @@ flowchart TD
     end
 
     subgraph Server[💻 Remote Linux Server]
-        B[SFTP Service (sshd)\nTailscale IP: 100.x.x.x]
+        B[SFTP Service (sshd) <br/> Tailscale IP: 100.x.x.x]
         D[/home/alienbamboo/uploads/]
     end
 
