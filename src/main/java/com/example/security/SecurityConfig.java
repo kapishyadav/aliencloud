@@ -25,12 +25,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final MyAppUserService appUserService;
+    private final MyAppUserService myAppUserService;
     private final PasswordEncoder passwordEncoder;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return appUserService;
+        return myAppUserService;
     }
 
     @Bean
@@ -41,12 +41,11 @@ public class SecurityConfig {
         return provider;
     }
 
-
     @Bean
     public OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService() {
     return userRequest -> {
         OAuth2User oAuth2User = new DefaultOAuth2UserService().loadUser(userRequest);
-        MyAppUser user = appUserService.loadUserEntity(userRequest, oAuth2User);
+        MyAppUser user = myAppUserService.loadUserEntity(userRequest, oAuth2User);
         return new AppUserPrincipal(user, oAuth2User.getAttributes());
         
     };
