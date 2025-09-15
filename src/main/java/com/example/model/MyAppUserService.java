@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MyAppUserService implements UserDetailsService, OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
+    private static final Logger log = LoggerFactory.getLogger(MyAppUserService.class);
     private final MyAppUserRepository repository;
     private final PasswordEncoder passwordEncoder;
 
@@ -66,6 +69,9 @@ public class MyAppUserService implements UserDetailsService, OAuth2UserService<O
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        log.info(">>> MyAppUserService.loadUser invoked for provider={}", 
+         userRequest.getClientRegistration().getRegistrationId());
+        log.info("OAuth2 login attempt for provider: {}", userRequest.getClientRegistration().getRegistrationId());
         OAuth2User oAuth2User = new DefaultOAuth2UserService().loadUser(userRequest);
 
         String provider = userRequest.getClientRegistration().getRegistrationId(); // google, github
@@ -108,9 +114,16 @@ public class MyAppUserService implements UserDetailsService, OAuth2UserService<O
      *  2. Fallback to email
      *  3. Insert new record
      */
-    private MyAppUser processOAuthPostLogin(String provider, String providerId, String email, String displayName) {
+    public MyAppUser processOAuthPostLogin(String provider, String providerId, String email, String displayName) {
+        log.info("Processing OAuth2 login for email={}, provider={}, providerId={}", email, provider, providerId);
         // 1. Check by provider + providerId
-        return repository.findByProviderAndProviderId(provider, providerId)
+        return repository.findByProviderAndProviderId(provider, providerId).map(user -> {
+            if(displayName != null && !displayName.equals(user.getDisplayName())) {
+                user.setDisplayName(displayName); // update display name
+                repository.save(user);
+            }
+            return user;
+        })
             .orElseGet(() -> {
                 // 2. Fallback: check by email
                 return repository.findByEmail(email).map(user -> {

@@ -41,4 +41,13 @@ spring:
                         client-id: ${GITHUB_SIGN_IN_CLIENT_ID}
                         client-secret: ${GITHUB_SIGN_IN_CLIENT_SECRET}
                         scope: user:email
+
+logging:
+    level:
+        root: INFO
+        com.example: DEBUG
+        org.springframework: INFO
+        org.hibernate.SQL: DEBUG
+        org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
                     

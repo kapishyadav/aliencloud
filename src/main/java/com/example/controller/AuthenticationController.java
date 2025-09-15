@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.MyAppUser;
+import com.example.security.AppUserPrincipal;
 import com.example.security.CustomOAuthUser;
 
 @RestController
@@ -27,11 +28,13 @@ public class AuthenticationController {
             String email = null;
             String provider = "local-db"; // default for database users
 
-            if (principal instanceof MyAppUser user) {
+            if (principal instanceof AppUserPrincipal appUser) {
+                MyAppUser user = appUser.getUser();
                 username = user.getUsername();
                 email = user.getEmail();
                 provider = user.getProvider() != null ? user.getProvider() : "local";
             } else if (principal instanceof CustomOAuthUser oauthUser) {
+                 // fallback, unlikely if using AppUserPrincipal
                 username = oauthUser.getName();       // display name from OAuth provider
                 email = oauthUser.getEmail();        // email from OAuth provider
                 provider = "oauth";                  // generic provider label
