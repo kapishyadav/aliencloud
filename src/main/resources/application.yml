@@ -8,9 +8,9 @@ spring:
     config:
         import: optional:file:aliencloud-render.env[.properties]
     datasource:
-        url: ${DB_URL}
-        password: ${DB_PASSWORD}
-        username: ${DB_USERNAME}
+        url: jdbc:postgresql://db.mxibqlgqqklpslmetxyo.supabase.co:5432/postgres?user=postgres&password=fegvI4-wuxdon-guwgym
+        password: fegvI4-wuxdon-guwgym
+        username: postgres
         driver-class-name: org.postgresql.Driver
         hikari:
             maximum-pool-size: 2   # safe for free-tier
